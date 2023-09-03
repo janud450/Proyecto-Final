@@ -1,0 +1,78 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+
+<h1 class="text-center"> 
+    Reporte Garantías Registradas
+</h1>
+
+{% endblock titulo %}
+
+
+{% block contenido %}
+
+
+    <h4> </h4>
+    <h4> </h4>
+    <h4> </h4>
+    <form class="form-inline my-2 my-lg-0" action="" method="GET">
+        {{ form }}
+        <button class="btn btn-info btn" type="submit" style="color:darkblue" >Buscar</button>
+        </fieldset>
+    </form>
+    <h4> </h4>
+    <h4> </h4>
+    <table>
+        <tr>
+            <td width="100"><h4>Agregar</h4></td>
+            <td>
+                <a
+                href="{% url 'crear_garantia' %}"
+                class="btn btn-info btn-sm"
+                ><i class="fa fa-plus fa-lg" title="New Record"> </i>
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del Banco</th>
+                <th>Número de Contrato</th>
+                <th>Valor</th>
+                <th>Fecha Inicial</th>
+                <th>Fecha Final</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for c in garantia_list  %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.banco }}</td>
+                <td>{{ c.contrato }}</td>
+                <td>{{ c.valor }}</td>
+                <td>{{ c.fecha_inicial }}</td>
+                <td>{{ c.fecha_final }}</td>
+                <td>
+                    <a
+                      href="{% url 'actualizar_garantia' c.id %}"
+                      class="btn btn-outline-primary"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                    </a>
+                    <a
+                      href="{% url 'eliminar_garantia' c.id %}"
+                      class="btn btn-outline-success"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                    </a>
+                  </td>        
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}

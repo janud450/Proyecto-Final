@@ -1,0 +1,72 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+
+{% block titulo %}
+
+<h1 class="text-center"> 
+    Reporte Sucursales
+</h1>
+
+{% endblock titulo %}
+
+
+{% block contenido %}
+
+
+    <h4> </h4>
+    <h4> </h4>
+    <h4> </h4>
+    <form class="form-inline my-2 my-lg-0" action="" method="GET">
+        {{ form }}
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color:darkblue" >Buscar</button>
+        </fieldset>
+    </form>
+    <h4> </h4>
+    <h4> </h4>
+    <table>
+        <tr>
+            <td width="100"><h4>Agregar</h4></td>
+            <td>
+                <a
+                href="{% url 'crear_sucursal' %}"
+                class="btn btn-info btn-sm"
+                ><i class="fa fa-plus fa-lg" title="New Record"> </i>
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Ciudad</th>
+                <th>Número de empleados</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for c in sucursal_list  %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.ciudad }}</td>
+                <td>{{ c.cantidad_empleados }}</td>
+                <td>
+                    <a
+                      href="{% url 'actualizar_sucursal' c.id %}"
+                      class="btn btn-outline-primary"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                    </a>
+                    <a
+                      href="{% url 'eliminar_sucursal' c.id %}"
+                      class="btn btn-outline-success"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                      ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                    </a>
+                  </td>        
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
